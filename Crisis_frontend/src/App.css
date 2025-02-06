@@ -1,42 +1,90 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Reset default margin/padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Prevent horizontal scrolling */
+html, body, #root {
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: none;
+  scroll-behavior: smooth; /* Smooth scrolling between sections */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Main app container */
+.appContainer {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+  transition: margin-left 0.3s ease-in-out; /* Smooth shift when sidebar opens */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: transform 0.3s ease-in-out; /* Sidebar animation */
+}
+
+/* Sidebar closed state */
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+/* Main content area */
+.mainContent {
+  flex: 1;
+  overflow-y: auto;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+/* Adjust margin when sidebar is open */
+.sidebar.open + .mainContent {
+  margin-left: 220px;
+}
+
+/* Full-screen Landing Page */
+.landingPage {
+  width: 100%;
+  height: 100vh; /* Full screen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+/* Shift landing page when sidebar opens */
+.sidebar.open + .mainContent .landingPage {
+  margin-left: 220px;
+}
+
+/* About Us Section (directly after Landing Page) */
+.aboutUs {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 10vw; /* Padding for readability */
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .sidebar.open + .mainContent {
+    margin-left: 60px;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .sidebar.open + .mainContent .landingPage {
+    margin-left: 60px;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

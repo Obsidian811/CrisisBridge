@@ -10,7 +10,9 @@ import VolunteerDashboard from './Dashboard/Volunteer_dashboard.tsx';
 import VictimDashboard from './Dashboard/Victim_dashboard.tsx';
 import Settings from './Settings/Settings.tsx';
 import MyProfile from './MyProfile/MyProfile.tsx';
-import styles from './App.module.css';
+// import Footer from './Footer/Footer.tsx';
+// import NotFound from './NotFound/NotFound.tsx';
+import './App.css';
 
 const App: React.FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,9 +24,9 @@ const App: React.FC = () => {
     };
 
     return (
-        <div className={styles.appContainer}>
+        <div className="appContainer">
             <Sidebar isOpen={isSidebarOpen} />
-            <div className={styles.mainContent} style={{ marginLeft: isSidebarOpen ? '220px' : '20px' }}>
+            <div className={`mainContent ${isSidebarOpen ? 'sidebarOpen' : ''}`}>
                 <ProfileButton onClick={toggleSidebar} />
                 <Navbar />
                 <Routes>
@@ -33,8 +35,10 @@ const App: React.FC = () => {
                     <Route path="/dashboard" element={userRole === 'volunteer' ? <VolunteerDashboard /> : <VictimDashboard />} />
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/myprofile" element={<MyProfile />} />
+                    {/* <Route path="*" element={<NotFound />} /> */}
                 </Routes>
                 {location.pathname === '/' && <AboutUs />}
+                {/* <Footer /> */}
             </div>
         </div>
     );
